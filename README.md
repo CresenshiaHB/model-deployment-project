@@ -23,7 +23,7 @@ Aplikasi interaktif ini dibangun menggunakan **Scikit-learn** untuk *modelling* 
 
 ---
 
-## ⚙️ Methodology & Feature Engineering
+## Methodology & Feature Engineering
 
 Model ini murni berbasis konten. Rekomendasi dihasilkan dengan mengukur kesamaan (similaritas) antar judul berdasarkan atribut teks mereka. Ini dicapai melalui beberapa langkah *preprocessing* dan *feature engineering*.
 
@@ -74,8 +74,9 @@ tfidf_matrix = tfidf.fit_transform(df['similarity'])
 # Hitung Cosine Similarity Matrix
 cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
 ```
+---
 
-## 🚀 Application Architecture (Streamlit)
+## Application Architecture (Streamlit)
 
 Aplikasi web ini dibangun menggunakan Streamlit (inferencing.py) dan menggunakan class-based model (modelling.py) untuk menjaga kode tetap bersih dan terorganisir.
 modelling.py: Berisi class NetflixRecommender yang menangani semua logika pemuatan data, preprocessing, dan modelling.
@@ -105,15 +106,18 @@ if st.button("Show recommendation") and selected_title:
     # Panggil model untuk mendapatkan rekomendasi
     result = recommender.get_recommendations(selected_title, topn=5)
 ```
+---
 
-## 🛠️ Tech Stack
+## Tech Stack
 * Python
 * Pandas: Untuk manipulasi dan preprocessing data.
 * Scikit-learn: Untuk TfidfVectorizer dan linear_kernel (Cosine Similarity).
 * Streamlit: Untuk membangun dan menayangkan antarmuka web interaktif.
 * Pickle: Untuk serialisasi dan desrialisasi DataFrame yang telah diproses.
 
-## 🏁 How to Run Locally
+---
+
+## How to Run Locally
 1. Clone the repository:
    ```python
    git clone [https://github.com/CresenshiaHB/model-deployment-project.git](https://github.com/CresenshiaHB/model-deployment-project.git)
