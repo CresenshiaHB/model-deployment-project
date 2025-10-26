@@ -39,7 +39,6 @@ Fitur `cast` dan `genres` (dari `listed_in`) adalah *string* yang berisi banyak 
 * **Genres:** Semua genre diekstraksi dan diformat dengan cara yang sama.
 
 ```python
-# Contoh logika ekstraksi
 df['cast'] = df['cast'].apply(lambda x: [i.strip().lower().replace(' ', '') for i in x.split(',')[:3]])
 df['genres'] = df['listed_in'].fillna('').apply(lambda x: [g.strip().lower().replace(' ', '') for g in x.split(',')])
 df['director'] = df['director'].apply(lambda x: [x.strip().lower().replace(' ', '')] if x else [])
@@ -71,7 +70,7 @@ from sklearn.metrics.pairwise import linear_kernel
 tfidf = TfidfVectorizer(stop_words='english', max_features=5000)
 tfidf_matrix = tfidf.fit_transform(df['similarity'])
 
-# Hitung Cosine Similarity Matrix
+# Cosine Similarity Matrix
 cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
 ```
 ---
@@ -79,14 +78,13 @@ cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
 ## Application Architecture (Streamlit)
 
 Aplikasi web ini dibangun menggunakan Streamlit (inferencing.py) dan menggunakan class-based model (modelling.py) untuk menjaga kode tetap bersih dan terorganisir.
-modelling.py: Berisi class NetflixRecommender yang menangani semua logika pemuatan data, preprocessing, dan modelling.
-inferencing.py: Berisi logika UI Streamlit.
-netflix_df.pkl: Sebuah file pickle dari DataFrame yang telah diproses (setelah langkah 1 & 2) untuk mempercepat waktu startup aplikasi.
+* **modelling.py**: Berisi class NetflixRecommender yang menangani semua logika pemuatan data, preprocessing, dan modelling.
+* **inferencing.py**: Berisi logika UI Streamlit.
+* **netflix_df.pkl**: Sebuah file pickle dari DataFrame yang telah diproses (setelah langkah 1 & 2) untuk mempercepat waktu startup aplikasi.
 
 Saat startup, aplikasi memuat netflix_df.pkl, kemudian class NetflixRecommender membangun model TF-IDF dan similarity matrix di dalam memori.
 
 ```python
-# Logika inti di inferencing.py
 @st.cache_resource
 def load_model():
     # Load DataFrame yang sudah diproses
@@ -101,7 +99,6 @@ def load_model():
 
 recommender = load_model()
 
-# UI
 if st.button("Show recommendation") and selected_title:
     # Panggil model untuk mendapatkan rekomendasi
     result = recommender.get_recommendations(selected_title, topn=5)
