@@ -13,7 +13,7 @@ This interactive application is built using **Scikit-learn** for modeling and **
 (Note: The app may be in the sleep mode.)
 
 2. Access the full PDF documentation here:
-https://github.com/CresenshiaHB/mental-health-streamlit/blob/main/Docummentation.pdf
+[https://github.com/CresenshiaHB/mental-health-streamlit/blob/main/Docummentation.pdf](https://github.com/CresenshiaHB/model-deployment-project/blob/main/Docummentation.pdf)
 
 ---
 
