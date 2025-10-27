@@ -6,6 +6,17 @@ This interactive application is built using **Scikit-learn** for modeling and **
 
 ---
 
+## Live Application
+
+1. Access the deployed dashboard here:
+[https://nova-mental-health.streamlit.app](https://modeldeployment-project.streamlit.app/)
+(Note: The app may be in the sleep mode.)
+
+2. Access the full PDF documentation here:
+https://github.com/CresenshiaHB/mental-health-streamlit/blob/main/Docummentation.pdf
+
+---
+
 ## 📊 Dataset Overview
 
 * **Source:** [Netflix Movies and TV Shows Dataset (Kaggle)](https://www.kaggle.com/datasets/shivamb/netflix-shows)
