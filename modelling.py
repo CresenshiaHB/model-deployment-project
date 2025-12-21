@@ -9,6 +9,7 @@ class NetflixRecommender:
         self.df = None
         self.cosine_sim = None
         self.indices = None
+        self.indices_lowercase = None
 
     def load_and_preprocess_data(self):
         self.df = pd.read_csv(self.file_path)
@@ -31,12 +32,15 @@ class NetflixRecommender:
         tfidf_matrix = tfidf.fit_transform(self.df['similarity'])
         self.cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
         self.indices = pd.Series(self.df.index, index=self.df['title']).drop_duplicates()
+        self.indices_lowercase = pd.Series(self.df.index, index=self.df['title'].str.lower()).drop_duplicates()
 
     def get_recommendations(self, title, topn=5):
         if self.cosine_sim is None:
             self.build_model()
             
-        idx = self.indices.get(title)
+        title_lower = title.lower()
+        
+        idx = self.indices_lowercase.get(title_lower)
         if idx is None:
             return f"{title}** tidak ditemukan"
         
@@ -53,11 +57,12 @@ class NetflixRecommender:
 
 
 if __name__ == "__main__":   
-    recommender = NetflixRecommender("C:/Users/cheryl/OneDrive - Bina Nusantara/Documents/sem 4/modep/Final Project/netflix_titles.csv")
+    recommender = NetflixRecommender("/kaggle/input/netflix_titles.csv")
     recommender.build_model()
     
     recommendations = recommender.get_recommendations('Stranger Things', topn=5)
     print("Rekomendasi untuk 'Stranger Things':")
     print(recommendations)
     
+
     recommender.save_df_to_pickle('netflix_df.pkl')
