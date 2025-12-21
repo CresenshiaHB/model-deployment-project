@@ -20,14 +20,21 @@ recommender = load_model()
 # --- Streamlit UI ---
 st.title("🎬 Netflix Content-Based Recommender")
 
-# Text input judul
-selected_title = st.text_input("Enter movie/tv shows:")
+# Film Titles
+movie_titles = recommender.df['title'].values
 
-# Tombol tampilkan
+# Input Box
+selected_title = st.selectbox(
+    "Type to search movie:",
+    options=movie_titles,
+    index=None,
+    placeholder="Search for a movie (e.g. Stranger Things)..."
+)
+
+# Button to Show The Output
 if st.button("Show recommendation") and selected_title:
     result = recommender.get_recommendations(selected_title, topn=5)
 
-    # Jika hasil berupa DataFrame, tampilkan
     if isinstance(result, str):
         st.warning(result)  # kalau judul tidak ditemukan
     else:
@@ -36,4 +43,5 @@ if st.button("Show recommendation") and selected_title:
             st.markdown(f"### 🎥 {row['title']} ({row['release_year']})")
             st.markdown(f"*Type: {row['type']}  \nGenre*: {', '.join(row['genres'])}")
             st.markdown(f"{row['description']}")
+
             st.markdown("---")
