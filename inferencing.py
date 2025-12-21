@@ -27,8 +27,7 @@ movie_titles = recommender.df['title'].values
 selected_title = st.selectbox(
     "Type to search movie:",
     options=movie_titles,
-    index=None,
-    placeholder="Search for a movie (e.g. Stranger Things)..."
+    index=None
 )
 
 # Button to Show The Output
@@ -45,3 +44,4 @@ if st.button("Show recommendation") and selected_title:
             st.markdown(f"{row['description']}")
 
             st.markdown("---")
+
